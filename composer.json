@@ -1,0 +1,26 @@
+{
+    "name": "matheus/survey-php-slim",
+    "description": "Survey Api Slim",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "": "src/",
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Matheus Souza Jose",
+            "email": "matheus.jose@aluno.faculdadeimpacta.com.br"
+        }
+    ],
+    "require-dev": {
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.1"
+    },
+    "require": {
+        "ext-mongodb": "*",
+        "mongodb/mongodb": "^1.12",
+        "respect/validation": "^2.3"
+    }
+}

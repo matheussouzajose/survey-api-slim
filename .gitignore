@@ -1,0 +1,6 @@
+/.composer
+/.idea
+/vendor
+.env
+/.docker/db
+/.docker/mongo/db

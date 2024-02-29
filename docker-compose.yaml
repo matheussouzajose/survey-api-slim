@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:alpine
+    container_name: survey-api-redis
+    ports:
+      - "6379:6379"
+    networks:
+      survey-api-local-network:
+        aliases:
+          - redis
+
+  app:
+    build:
+      context: .
+    container_name: survey-api-app
+    ports:
+      - "9000:80"
+    #    env_file:
+    #      - .env
+    volumes:
+      - .:/application
+      - vendor:/application/vendor
+    depends_on: [ 'redis', 'mongodb' ]
+    networks:
+      survey-api-local-network:
+        aliases:
+          - app
+
+  mongodb:
+    image: mongo:6.0.6
+    container_name: survey-api-mongodb
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME:admin
+      - MONGO_INITDB_ROOT_PASSWORD:102030
+    command: mongod --port 27014
+    ports:
+      - "27014:27014"
+    volumes:
+      - ./.docker/db/init-db:/docker-entrypoint-initdb.d
+      - ./.docker/db/dbs:/dbs
+      - ./.docker/db/files:/data/db
+    networks:
+      survey-api-local-network:
+        aliases:
+          - mongodb
+
+volumes:
+  vendor:
+  survey-api-local-data:
+    driver: "local"
+
+networks:
+  survey-api-local-network:
+    name: survey-api-local-network
+    driver: bridge
