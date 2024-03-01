@@ -66,4 +66,11 @@ class EventDispatcherUnitTest extends TestCase
 
         $eventHandler->shouldHaveReceived('handle')->once();
     }
+
+    protected function tearDown(): void
+    {
+        \Mockery::close();
+
+        parent::tearDown();
+    }
 }

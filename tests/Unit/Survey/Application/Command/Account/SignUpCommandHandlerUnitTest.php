@@ -131,4 +131,11 @@ class SignUpCommandHandlerUnitTest extends TestCase
         $this->assertTrue($result['success']);
         $this->assertEquals('Account Created', $result['message']);
     }
+    protected function tearDown(): void
+    {
+        \Mockery::close();
+
+        parent::tearDown();
+    }
+
 }

@@ -110,4 +110,11 @@ class AccountUnitTest extends TestCase
             password: '123456789'
         );
     }
+
+    protected function tearDown(): void
+    {
+        \Mockery::close();
+
+        parent::tearDown();
+    }
 }
