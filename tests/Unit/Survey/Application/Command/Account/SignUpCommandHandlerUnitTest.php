@@ -61,10 +61,10 @@ class SignUpCommandHandlerUnitTest extends TestCase
             passwordConfirmation: '123456789'
         );
 
-        $accountRepository = $this->mockRepository(objectId: (string)ObjectId::random());
+        $accountRepository = $this->mockRepository(objectId: (string)ObjectId::random(), timesCalled: 0);
         $accountRepository->shouldReceive('checkByEmail')->andReturn(true);
 
-        $eventDispatcher = $this->mockEventDispatcher();
+        $eventDispatcher = $this->mockEventDispatcher(timesCalled: 0);
 
         $commandHandler = new SignUpCommandHandler(
             accountRepository: $accountRepository,
@@ -87,10 +87,10 @@ class SignUpCommandHandlerUnitTest extends TestCase
             passwordConfirmation: '12345678910'
         );
 
-        $accountRepository = $this->mockRepository(objectId: (string)ObjectId::random());
+        $accountRepository = $this->mockRepository(objectId: (string)ObjectId::random(), timesCalled: 0);
         $accountRepository->shouldReceive('checkByEmail')->andReturn(false);
 
-        $eventDispatcher = $this->mockEventDispatcher();
+        $eventDispatcher = $this->mockEventDispatcher(timesCalled: 0);
 
         $commandHandler = new SignUpCommandHandler(
             accountRepository: $accountRepository,

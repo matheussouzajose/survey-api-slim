@@ -6,9 +6,9 @@ namespace Survey\Domain\Entity;
 
 use Survey\Domain\Exception\NotificationErrorException;
 use Survey\Domain\Factory\AccountValidatorFactory;
+use Survey\Domain\Validator\Account\AccountValidator;
 use Survey\Domain\ValueObject\Email;
 use Survey\Domain\ValueObject\ObjectId;
-use Survey\Infrastructure\Validator\AccountValidator;
 
 class Account extends Entity
 {

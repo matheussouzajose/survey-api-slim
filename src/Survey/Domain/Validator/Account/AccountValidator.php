@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Survey\Infrastructure\Validator;
+namespace Survey\Domain\Validator\Account;
 
-use Survey\Domain\Entity\Entity;
-use Survey\Domain\Validator\ValidatorInterface;
 use Respect\Validation\Exceptions\ValidationException;
 use Respect\Validation\Validator as v;
+use Survey\Domain\Entity\Entity;
+use Survey\Domain\Validator\ValidatorInterface;
 
 class AccountValidator implements ValidatorInterface
 {

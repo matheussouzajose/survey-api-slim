@@ -61,7 +61,7 @@ class MongoHelper
         }, $collection->toArray());
     }
 
-    public function objectId(string $id): ObjectId
+    public static function objectId(string $id): ObjectId
     {
         return new ObjectId($id);
     }

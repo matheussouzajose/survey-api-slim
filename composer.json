@@ -22,6 +22,11 @@
     "require": {
         "ext-mongodb": "*",
         "mongodb/mongodb": "^1.12",
-        "respect/validation": "^2.3"
+        "respect/validation": "^2.3",
+        "slim/slim": "^4.0",
+        "slim/http": "^1.3",
+        "slim/psr7": "^1.6",
+        "guzzlehttp/guzzle": "^7.8",
+        "firebase/php-jwt": "^6.9"
     }
 }

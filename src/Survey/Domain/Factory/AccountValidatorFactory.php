@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Survey\Domain\Factory;
 
+use Survey\Domain\Validator\Account\AccountValidator;
 use Survey\Domain\Validator\ValidatorInterface;
-use Survey\Infrastructure\Validator\AccountValidator;
 
 class AccountValidatorFactory
 {
