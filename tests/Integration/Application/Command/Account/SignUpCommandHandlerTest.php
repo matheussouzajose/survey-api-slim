@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\Integration\Application\Command;
+namespace Tests\Integration\Application\Command\Account;
 
-use Survey\Application\Command\SignUpCommand;
-use Survey\Application\Command\SignUpCommandHandler;
+use Survey\Application\Command\Account\SignUpCommand;
+use Survey\Application\Command\Account\SignUpCommandHandler;
 use Survey\Infrastructure\Persistence\MongoDb\Helpers\MongoHelper;
 use Survey\Infrastructure\Persistence\MongoDb\Repository\AccountRepository;
 use Tests\RefreshDatabaseMongoDb;
 use Tests\TestCase;
 use Tests\Unit\Mocks\Event\EventDispatcherMock;
 
-class SignUpCommandTest extends TestCase
+class SignUpCommandHandlerTest extends TestCase
 {
     use RefreshDatabaseMongoDb;
 

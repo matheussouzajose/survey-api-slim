@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Survey\Application\Command\Account;
 
-use Survey\Application\Command\SignUpCommand;
-use Survey\Application\Command\SignUpCommandHandler;
+use Survey\Application\Command\Account\SignUpCommand;
+use Survey\Application\Command\Account\SignUpCommandHandler;
 use Survey\Domain\Entity\Account;
 use Survey\Domain\Event\Account\AccountCreatedEvent;
 use Survey\Domain\Event\EventDispatcherInterface;

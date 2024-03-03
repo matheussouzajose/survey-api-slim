@@ -14,7 +14,7 @@ interface AccountRepositoryInterface
 
     public function loadByEmail(string $email): ?Account;
 
-    public function updateAccessToken(Account $entity): ?int;
+    public function updateAccessToken(Account $entity): bool;
 
     public function checkByToken(string $token): bool;
 }

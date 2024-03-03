@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Survey\Application\Command;
+namespace Survey\Application\Command\Account;
 
 use Survey\Application\Interfaces\Cryptography\EncrypterInterface;
 use Survey\Application\Traits\ResponseTrait;

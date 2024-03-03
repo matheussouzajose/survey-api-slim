@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Survey\Ui\Api\Controller\Account;
 
-use Survey\Application\Command\SignInCommand;
-use Survey\Application\Command\SignInCommandHandler;
-use Survey\Application\Command\SignUpCommand;
-use Survey\Application\Command\SignUpCommandHandler;
+use Survey\Application\Command\Account\SignInCommand;
+use Survey\Application\Command\Account\SignInCommandHandler;
+use Survey\Application\Command\Account\SignUpCommand;
+use Survey\Application\Command\Account\SignUpCommandHandler;
 use Survey\Ui\Api\Adapter\Http\HttpHelper;
 use Survey\Ui\Api\Adapter\Http\HttpResponse;
 use Survey\Ui\Api\Controller\ControllerInterface;

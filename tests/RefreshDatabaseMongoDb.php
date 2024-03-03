@@ -10,7 +10,8 @@ trait RefreshDatabaseMongoDb
 {
     public function tearDown(): void
     {
-        $database = MongoHelper::getClient()->selectDatabase(getenv('MONGODB_DATABASE'));
+//        var_dump(getenv('MONGODB_DATABASE'));
+        $database = MongoHelper::getClient()->selectDatabase(MongoHelper::getDatabase());
 
         $collections = $database->listCollections();
         foreach ($collections as $collectionInfo) {

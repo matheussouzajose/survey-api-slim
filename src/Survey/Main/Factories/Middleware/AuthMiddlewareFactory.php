@@ -11,13 +11,12 @@ use Survey\Ui\Api\Middlewares\MiddlewareInterface;
 
 class AuthMiddlewareFactory
 {
-    public static function create(): MiddlewareInterface
+    public static function create(?string $role = null): MiddlewareInterface
     {
         return new AuthMiddleware(
             accountRepository: AccountRepositoryFactory::create(),
-            encrypter: new JwtAdapter(
-                getenv('SECRET_JWT')
-            )
+            encrypter: new JwtAdapter(getenv('SECRET_JWT')),
+            role: $role
         );
     }
 }

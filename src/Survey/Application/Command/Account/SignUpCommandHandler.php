@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Survey\Application\Command;
+namespace Survey\Application\Command\Account;
 
 use Survey\Application\Traits\ResponseTrait;
 use Survey\Domain\Entity\Account;

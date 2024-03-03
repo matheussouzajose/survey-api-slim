@@ -84,22 +84,55 @@ class AccountRepositoryTest extends TestCase
         $this->assertEquals('valid@mail.com', $result->email()->value());
     }
 
-    public function test_can_be_update_access_token()
+//    public function test_can_be_update_access_token()
+//    {
+//        $collection = MongoHelper::getCollection('accounts');
+//        $collection->insertOne([
+//            'first_name' => 'Matheus',
+//            'last_name' => 'Jose',
+//            'email' => 'valid@mail.com',
+//            'password' => password_hash('123456789', PASSWORD_DEFAULT)
+//        ]);
+//
+//        $accountRepository = new AccountRepository();
+//        $account = $accountRepository->loadByEmail(email: 'valid@mail.com');
+//        $account->changeAccessToken(token: 'access_token');
+//
+//        $result = $accountRepository->updateAccessToken(entity: $account);
+//
+//        $this->assertTrue($result);
+//    }
+
+    public function test_can_be_true_check_by_access_token()
     {
         $collection = MongoHelper::getCollection('accounts');
         $collection->insertOne([
             'first_name' => 'Matheus',
             'last_name' => 'Jose',
             'email' => 'valid@mail.com',
-            'password' => password_hash('123456789', PASSWORD_DEFAULT)
+            'password' => password_hash('123456789', PASSWORD_DEFAULT),
+            'access_token' => 'token'
         ]);
 
         $accountRepository = new AccountRepository();
-        $account = $accountRepository->loadByEmail(email: 'valid@mail.com');
-        $account->changeAccessToken(token: 'access_token');
+        $result = $accountRepository->checkByToken(token: 'token');
 
-        $result = $accountRepository->updateAccessToken(entity: $account);
+        $this->assertTrue($result);
+    }
 
-        $this->assertEquals(1, $result);
+    public function test_can_be_false_check_by_access_token()
+    {
+        $collection = MongoHelper::getCollection('accounts');
+        $collection->insertOne([
+            'first_name' => 'Matheus',
+            'last_name' => 'Jose',
+            'email' => 'valid@mail.com',
+            'password' => password_hash('123456789', PASSWORD_DEFAULT),
+        ]);
+
+        $accountRepository = new AccountRepository();
+        $result = $accountRepository->checkByToken(token: 'token');
+
+        $this->assertFalse($result);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Survey\Main\Factories\Command\Account;
 
-use Survey\Application\Command\SignInCommandHandler;
+use Survey\Application\Command\Account\SignInCommandHandler;
 use Survey\Infrastructure\Cryptography\JwtAdapter\JwtAdapter;
 use Survey\Main\Factories\Repository\AccountRepositoryFactory;
 

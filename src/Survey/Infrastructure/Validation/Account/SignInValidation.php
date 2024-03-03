@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Survey\Infrastructure\Validation;
+namespace Survey\Infrastructure\Validation\Account;
 
 use Respect\Validation\Exceptions\ValidationException;
 use Respect\Validation\Validator as v;

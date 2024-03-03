@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Ui\Api\Controller\Account;
 
-use Survey\Application\Command\SignInCommandHandler;
+use Survey\Application\Command\Account\SignInCommandHandler;
 use Survey\Infrastructure\Cryptography\JwtAdapter\JwtAdapter;
 use Survey\Infrastructure\Persistence\MongoDb\Helpers\MongoHelper;
 use Survey\Infrastructure\Persistence\MongoDb\Repository\AccountRepository;
-use Survey\Infrastructure\Validation\SignInValidation;
+use Survey\Infrastructure\Validation\Account\SignInValidation;
 use Survey\Ui\Api\Adapter\Http\HttpResponse;
 use Survey\Ui\Api\Controller\Account\SignInController;
 use Tests\RefreshDatabaseMongoDb;

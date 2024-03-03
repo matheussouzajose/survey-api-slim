@@ -43,7 +43,7 @@ class MongoHelper
 
     public static function getCollection(string $name): Collection
     {
-        return self::getClient()->selectDatabase(getenv('MONGODB_DATABASE'))->selectCollection($name);
+        return self::getClient()->selectDatabase(self::getDatabase())->selectCollection($name);
     }
 
     public function map($data): array
@@ -64,5 +64,13 @@ class MongoHelper
     public static function objectId(string $id): ObjectId
     {
         return new ObjectId($id);
+    }
+
+    public static function getDatabase(): false|array|string
+    {
+        if (getenv('TESTING')) {
+            return 'test_database';
+        }
+        return getenv('MONGODB_DATABASE');
     }
 }

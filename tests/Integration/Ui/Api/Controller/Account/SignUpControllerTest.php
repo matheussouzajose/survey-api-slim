@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Ui\Api\Controller\Account;
 
-use Survey\Application\Command\SignUpCommandHandler;
+use Survey\Application\Command\Account\SignInCommandHandler;
+use Survey\Application\Command\Account\SignUpCommandHandler;
+use Survey\Infrastructure\Cryptography\JwtAdapter\JwtAdapter;
 use Survey\Infrastructure\Persistence\MongoDb\Helpers\MongoHelper;
 use Survey\Infrastructure\Persistence\MongoDb\Repository\AccountRepository;
-use Survey\Infrastructure\Validation\SignUpValidation;
+use Survey\Infrastructure\Validation\Account\SignUpValidation;
 use Survey\Ui\Api\Adapter\Http\HttpResponse;
 use Survey\Ui\Api\Controller\Account\SignUpController;
 use Tests\RefreshDatabaseMongoDb;
@@ -78,7 +80,7 @@ class SignUpControllerTest extends TestCase
         $this->assertInstanceOf(HttpResponse::class, $result);
         $this->assertEquals(201, $result->getStatusCode());
 
-        $this->assertEquals('Account Created', $result->getBody());
+        $this->assertIsArray($result->getBody()['authentication']);
     }
 
     private function createController(): SignUpController
@@ -89,9 +91,14 @@ class SignUpControllerTest extends TestCase
             eventDispatcher: new EventDispatcherMock()
         );
 
+        $signInCommandHandler = new SignInCommandHandler(
+            accountRepository: new AccountRepository(), encrypter: new JwtAdapter('SECRET')
+        );
+
         return new SignUpController(
             validation: $validation,
-            commandHandler: $commandHandler
+            commandHandler: $commandHandler,
+            signInCommandHandler: $signInCommandHandler
         );
     }
 }

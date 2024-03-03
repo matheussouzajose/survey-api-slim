@@ -72,6 +72,9 @@ class Account extends Entity
         return $this->accessToken;
     }
 
+    /**
+     * @throws NotificationErrorException
+     */
     public function changeName(string $firstName, string $lastName): void
     {
         $this->firstName = $firstName;
@@ -81,6 +84,9 @@ class Account extends Entity
         $this->validation();
     }
 
+    /**
+     * @throws NotificationErrorException
+     */
     public function changeEmail(Email $email): void
     {
         $this->email = $email;
@@ -89,6 +95,9 @@ class Account extends Entity
         $this->validation();
     }
 
+    /**
+     * @throws NotificationErrorException
+     */
     public function changePassword(string $password): void
     {
         $this->password = $password;
@@ -97,11 +106,28 @@ class Account extends Entity
         $this->validation();
     }
 
+    /**
+     * @throws NotificationErrorException
+     */
     public function changeAccessToken(string $token): void
     {
         $this->accessToken = $token;
         $this->updatedAt = new \DateTime();
 
         $this->validation();
+    }
+
+    public function toArray(): array
+    {
+        return [
+            '_id' => $this->id(),
+            'first_name' => $this->firstName(),
+            'last_name' => $this->lastName(),
+            'email' => $this->email()->value(),
+            'password' => $this->password(),
+            'access_token' => $this->accessToken(),
+            'created_at' => $this->createdAt(),
+            'updated_at' => $this->createdAt(),
+        ];
     }
 }

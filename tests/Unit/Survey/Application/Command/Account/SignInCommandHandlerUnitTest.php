@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Survey\Application\Command\Account;
 
-use Survey\Application\Command\SignInCommand;
-use Survey\Application\Command\SignInCommandHandler;
+use Survey\Application\Command\Account\SignInCommand;
+use Survey\Application\Command\Account\SignInCommandHandler;
 use Survey\Application\Interfaces\Cryptography\EncrypterInterface;
 use Survey\Domain\Entity\Account;
 use Survey\Domain\Repository\AccountRepositoryInterface;

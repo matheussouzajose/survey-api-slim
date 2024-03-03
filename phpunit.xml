@@ -8,6 +8,9 @@
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
     </testsuites>
     <source>
         <include>
@@ -17,6 +20,7 @@
     <php>
         <env name="MONGODB_URI" value="mongodb://localhost:27014/test_database"/>
         <env name="MONGODB_DATABASE" value="test_database"/>
+        <env name="TESTING" value="true"/>
         <ini name="SECRET_JWT" value="SECRET_JWT" />
     </php>
 </phpunit>

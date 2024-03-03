@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Survey\Main\Factories\Controller\Account;
 
-use Survey\Infrastructure\Validation\SignUpValidation;
+use Survey\Infrastructure\Validation\Account\SignUpValidation;
 use Survey\Main\Decorator\LogControllerDecorator;
 use Survey\Main\Factories\Command\Account\SignInCommandHandlerFactory;
 use Survey\Main\Factories\Command\Account\SignUpCommandHandlerFactory;

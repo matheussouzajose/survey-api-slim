@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Survey\Application\Command;
+namespace Survey\Application\Command\Account;
 
 class SignInCommand
 {

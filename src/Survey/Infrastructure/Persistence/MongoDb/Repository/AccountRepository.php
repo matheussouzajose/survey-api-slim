@@ -12,9 +12,12 @@ use Survey\Domain\ValueObject\Email;
 use Survey\Domain\ValueObject\ObjectId;
 use Survey\Infrastructure\Persistence\MongoDb\Helpers\MongoHelper;
 use Survey\Infrastructure\Persistence\MongoDb\Helpers\QueryBuilder;
+use Tests\RefreshDatabaseMongoDb;
 
 class AccountRepository implements AccountRepositoryInterface
 {
+    use RefreshDatabaseMongoDb;
+
     public Collection $collection;
 
     public function __construct()
@@ -36,14 +39,7 @@ class AccountRepository implements AccountRepositoryInterface
      */
     public function add(Account $entity): Account
     {
-        $this->collection->insertOne([
-            '_id' => $entity->id(),
-            'first_name' => $entity->firstName(),
-            'last_name' => $entity->lastName(),
-            'email' => $entity->email()->value(),
-            'password' => $entity->password(),
-            'created_at' => $entity->createdAt(),
-        ]);
+        $this->collection->insertOne($entity->toArray());
 
         $result = $this->collection->findOne(['_id' => $entity->id()]);
 
@@ -78,7 +74,7 @@ class AccountRepository implements AccountRepositoryInterface
         return $account ? $this->createEntity($account) : null;
     }
 
-    public function updateAccessToken(Account $entity): ?int
+    public function updateAccessToken(Account $entity): bool
     {
         $builder = new QueryBuilder();
         $builder->set([
@@ -87,10 +83,10 @@ class AccountRepository implements AccountRepositoryInterface
         ]);
 
         $result = $this->collection->updateOne([
-            '_id' =>  $entity->id()
+            '_id' => $entity->id()
         ], $builder->build());
 
-        return $result->getModifiedCount();
+        return $result->getModifiedCount() > 0;
     }
 
     public function checkByToken(string $token): bool

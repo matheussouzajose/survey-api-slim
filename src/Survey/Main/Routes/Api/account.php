@@ -6,6 +6,7 @@ use Survey\Main\Adapters\SlimRouteAdapter;
 use Survey\Main\Factories\Controller\Account\SignInControllerFactory;
 use Survey\Main\Factories\Controller\Account\SignUpControllerFactory;
 use Survey\Main\Factories\Middleware\AuthMiddlewareFactory;
+use Survey\Main\Middlewares\AuthMiddleware;
 use Survey\Ui\Api\Controller\AuthenticationController;
 
 return function (RouteCollectorProxy $app) {
@@ -18,6 +19,6 @@ return function (RouteCollectorProxy $app) {
         "/{$prefix}/{$version}/authentication",
         new SlimRouteAdapter(controller: new AuthenticationController())
     )->add(
-        middleware: new SlimMiddlewareAdapter(middleware: AuthMiddlewareFactory::create())
+        middleware: (new AuthMiddleware())()
     );
 };

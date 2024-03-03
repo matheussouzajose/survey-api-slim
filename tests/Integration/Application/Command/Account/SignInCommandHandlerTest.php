@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\Integration\Application\Command;
+namespace Tests\Integration\Application\Command\Account;
 
-use Survey\Application\Command\SignInCommand;
-use Survey\Application\Command\SignInCommandHandler;
+use Survey\Application\Command\Account\SignInCommand;
+use Survey\Application\Command\Account\SignInCommandHandler;
 use Survey\Infrastructure\Cryptography\JwtAdapter\JwtAdapter;
 use Survey\Infrastructure\Persistence\MongoDb\Helpers\MongoHelper;
 use Survey\Infrastructure\Persistence\MongoDb\Repository\AccountRepository;
 use Tests\RefreshDatabaseMongoDb;
 use Tests\TestCase;
 
-class SignInCommandTest extends TestCase
+class SignInCommandHandlerTest extends TestCase
 {
     use RefreshDatabaseMongoDb;
 
@@ -70,8 +70,8 @@ class SignInCommandTest extends TestCase
 
         $result = ($commandHandler)(command: $command);
 
-        $this->assertNotEmpty($result['authentication']['access_token']);
-        $this->assertEquals('Bearer', $result['authentication']['token_type']);
-        $this->assertEquals('Matheus', $result['name']);
+        $this->assertNotEmpty($result['result']['authentication']['access_token']);
+        $this->assertEquals('Bearer', $result['result']['authentication']['token_type']);
+        $this->assertEquals('Matheus', $result['result']['name']);
     }
 }

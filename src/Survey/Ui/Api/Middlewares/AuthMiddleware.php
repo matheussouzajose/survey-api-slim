@@ -13,7 +13,8 @@ class AuthMiddleware implements MiddlewareInterface
 {
     public function __construct(
         protected AccountRepositoryInterface $accountRepository,
-        protected EncrypterInterface $encrypter
+        protected EncrypterInterface $encrypter,
+        protected ?string $role = null
     ) {
     }
 
