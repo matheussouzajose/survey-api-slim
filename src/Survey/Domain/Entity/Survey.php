@@ -13,12 +13,12 @@ use Survey\Domain\ValueObject\SurveyAnswer;
 class Survey extends Entity
 {
     /**
-     * @param SurveyAnswer[] $surveyAnswer
+     * @param SurveyAnswer[] $answers
      * @throws NotificationErrorException
      */
     public function __construct(
         protected string $question,
-        protected array $surveyAnswer = [],
+        protected array $answers = [],
         protected bool $didAnswer = false,
         protected ?ObjectId $id = null,
         protected ?\DateTimeInterface $createdAt = null,
@@ -51,9 +51,9 @@ class Survey extends Entity
         return $this->question;
     }
 
-    public function surveyAnswer(): array
+    public function answers(): array
     {
-        return $this->surveyAnswer;
+        return $this->answers;
     }
 
     public function isAnswered(): bool
@@ -77,7 +77,7 @@ class Survey extends Entity
      */
     public function addSurveyAnswer(SurveyAnswer $surveyAnswer): void
     {
-        $this->surveyAnswer[] = $surveyAnswer;
+        $this->answers[] = $surveyAnswer;
         $this->updatedAt = new \DateTime();
 
         $this->validation();
@@ -88,7 +88,7 @@ class Survey extends Entity
      */
     public function removeSurveyAnswer(SurveyAnswer $surveyAnswer): void
     {
-        $this->surveyAnswer = array_filter($this->surveyAnswer, fn($item) => $item !== $surveyAnswer);
+        $this->answers = array_filter($this->answers, fn($item) => $item !== $surveyAnswer);
         $this->updatedAt = new \DateTime();
 
         $this->validation();
@@ -123,12 +123,12 @@ class Survey extends Entity
             '_id' => $this->id(),
             'question' => $this->question(),
             'did_answer' => $this->isAnswered(),
-            'survey_answers' => array_map(function ($item) {
+            'answers' => array_map(function ($item) {
                 return [
                     'answer' => $item->answer(),
                     'image' => $item->image()?->path(),
                 ];
-            }, $this->surveyAnswer()),
+            }, $this->answers()),
             'created_at' => $this->createdAt(),
             'updated_at' => $this->updatedAt(),
         ];

@@ -22,7 +22,7 @@ class SurveyValidator implements ValidatorInterface
                 v::stringType()->length(1, 255)
             )
                 ->attribute(
-                    'surveyAnswer',
+                    'answers',
                     v::arrayType()->each(v::instance(SurveyAnswer::class))
                 )
                 ->attribute(

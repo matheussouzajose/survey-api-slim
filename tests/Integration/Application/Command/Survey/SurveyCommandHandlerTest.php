@@ -20,7 +20,7 @@ class SurveyCommandHandlerTest extends TestCase
 
         $command = new AddSurveyCommand(
             question: 'Question',
-            surveyAnswers: []
+            answers: []
         );
 
         $commandHandler = new AddSurveyCommandHandler(surveyRepository: $surveyRepository);
@@ -37,7 +37,7 @@ class SurveyCommandHandlerTest extends TestCase
 
         $command = new AddSurveyCommand(
             question: 'Question',
-            surveyAnswers: [
+            answers: [
                 []
             ]
         );
@@ -56,7 +56,7 @@ class SurveyCommandHandlerTest extends TestCase
 
         $command = new AddSurveyCommand(
             question: 'Question',
-            surveyAnswers: [
+            answers: [
                 [
                     'answer' => 'PHP',
                     'image' => '/php.jpeg',

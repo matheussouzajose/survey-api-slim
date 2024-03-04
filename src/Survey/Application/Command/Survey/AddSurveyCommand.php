@@ -6,7 +6,7 @@ namespace Survey\Application\Command\Survey;
 
 class AddSurveyCommand
 {
-    public function __construct(protected string $question, public array $surveyAnswers)
+    public function __construct(protected string $question, public array $answers)
     {
     }
 
@@ -15,8 +15,8 @@ class AddSurveyCommand
         return $this->question;
     }
 
-    public function getSurveyAnswers(): array
+    public function getAnswers(): array
     {
-        return $this->surveyAnswers;
+        return $this->answers;
     }
 }

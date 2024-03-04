@@ -18,7 +18,7 @@ class SurveyRepositoryTest extends TestCase
     {
         $survey = new Survey(
             question: 'Question',
-            surveyAnswer: [new SurveyAnswer(answer: 'Answer')]
+            answers: [new SurveyAnswer(answer: 'Answer')]
         );
 
         $surveyRepository = new SurveyRepository();
@@ -27,7 +27,7 @@ class SurveyRepositoryTest extends TestCase
         $this->assertNotEmpty($result->id());
         $this->assertNotEmpty($result->createdAt());
         $this->assertEquals('Question', $result->question());
-        $this->assertInstanceOf(SurveyAnswer::class, $result->surveyAnswer()[0]);
+        $this->assertInstanceOf(SurveyAnswer::class, $result->answers()[0]);
         $this->assertFalse($result->isAnswered());
     }
 

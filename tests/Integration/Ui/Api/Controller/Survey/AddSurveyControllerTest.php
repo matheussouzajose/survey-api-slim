@@ -22,7 +22,7 @@ class AddSurveyControllerTest extends TestCase
 
         $request = new \stdClass();
         $request->question = '';
-        $request->survey_answers = [];
+        $request->answers = [];
 
         $result = ($controller)(request: $request);
 

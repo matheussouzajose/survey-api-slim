@@ -21,7 +21,7 @@ class SurveyUnitTest extends TestCase
 
         new Survey(
             question: $question,
-            surveyAnswer: $surveyAnswer
+            answers: $surveyAnswer
         );
     }
 
@@ -40,7 +40,7 @@ class SurveyUnitTest extends TestCase
         $this->assertNotEmpty($survey->id());
         $this->assertNotEmpty($survey->createdAt());
         $this->assertEquals('Question One', $survey->question());
-        $this->assertCount(1, $survey->surveyAnswer());
+        $this->assertCount(1, $survey->answers());
         $this->assertFalse($survey->isAnswered());
         $this->assertNull($survey->updatedAt());
     }
@@ -62,7 +62,7 @@ class SurveyUnitTest extends TestCase
 
         $survey->addSurveyAnswer(surveyAnswer: new SurveyAnswer('new answer'));
 
-        $this->assertCount(2, $survey->surveyAnswer());
+        $this->assertCount(2, $survey->answers());
         $this->assertNotEmpty($survey->updatedAt());
     }
 
@@ -73,11 +73,11 @@ class SurveyUnitTest extends TestCase
         $surveyAnswer = new SurveyAnswer('new answer');
         $survey->addSurveyAnswer(surveyAnswer: $surveyAnswer);
 
-        $this->assertCount(2, $survey->surveyAnswer());
+        $this->assertCount(2, $survey->answers());
 
         $survey->removeSurveyAnswer(surveyAnswer: $surveyAnswer);
 
-        $this->assertCount(1, $survey->surveyAnswer());
+        $this->assertCount(1, $survey->answers());
         $this->assertNotEmpty($survey->updatedAt());
     }
 
@@ -105,7 +105,7 @@ class SurveyUnitTest extends TestCase
      */
     private function createSurvey(): Survey
     {
-        return new Survey(question: 'Question One', surveyAnswer: [new SurveyAnswer('answer')]);
+        return new Survey(question: 'Question One', answers: [new SurveyAnswer('answer')]);
     }
 
     protected function tearDown(): void

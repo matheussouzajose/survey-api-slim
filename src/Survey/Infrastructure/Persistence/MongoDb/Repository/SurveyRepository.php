@@ -42,7 +42,7 @@ class SurveyRepository implements SurveyRepositoryInterface
     private function createEntity(object $entity): Survey
     {
         $surveyAnswers = [];
-        foreach ($entity->survey_answers as $surveyAnswer) {
+        foreach ($entity->answers as $surveyAnswer) {
             $surveyAnswers[] = new SurveyAnswer(
                 answer: $surveyAnswer->answer,
                 image: $surveyAnswer->image ? new Image($surveyAnswer->image) : null
@@ -51,7 +51,7 @@ class SurveyRepository implements SurveyRepositoryInterface
 
         return new Survey(
             question: $entity->question,
-            surveyAnswer: $surveyAnswers,
+            answers: $surveyAnswers,
             didAnswer: $entity->did_answer,
             id: new ObjectId((string)$entity->_id),
             createdAt: isset($entity->created_at) ? new \DateTime($entity->created_at) : null,
@@ -71,7 +71,7 @@ class SurveyRepository implements SurveyRepositoryInterface
         $query->project([
             '_id' => 1,
             'question' => 1,
-            'survey_answers' => 1,
+            'answers' => 1,
             'created_at' => 1,
             'did_answer' => [
                 '$gte' => [

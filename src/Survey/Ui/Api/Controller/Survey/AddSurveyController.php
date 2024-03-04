@@ -33,7 +33,7 @@ class AddSurveyController implements ControllerInterface
             }
 
             return HttpHelper::created(data: $result['result']);
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             return HttpHelper::serverError(error: $e);
         }
     }
@@ -42,7 +42,7 @@ class AddSurveyController implements ControllerInterface
     {
         return new AddSurveyCommand(
             question: $request->question ?? '',
-            surveyAnswers: $request->answers ?? [],
+            answers: $request->answers ?? [],
         );
     }
 }

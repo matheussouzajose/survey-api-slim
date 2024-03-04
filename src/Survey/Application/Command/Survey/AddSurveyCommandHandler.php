@@ -26,11 +26,11 @@ class AddSurveyCommandHandler
     {
         $survey = new Survey(question: $command->getQuestion());
 
-        if ( count($command->getSurveyAnswers()) === 0 ) {
+        if ( count($command->getAnswers()) === 0 ) {
             return self::error('Answers is required');
         }
 
-        $canAddSurvey = $this->addSurveyAnswer(surveyAnswers: $command->getSurveyAnswers(), survey: $survey);
+        $canAddSurvey = $this->addSurveyAnswer(surveyAnswers: $command->getAnswers(), survey: $survey);
         if ( !$canAddSurvey ) {
             return self::error('Answers is required');
         }

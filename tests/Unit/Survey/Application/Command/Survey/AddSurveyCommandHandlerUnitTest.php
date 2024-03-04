@@ -56,7 +56,7 @@ class AddSurveyCommandHandlerUnitTest extends TestCase
     {
         $command = new AddSurveyCommand(
             question: 'Matheus',
-            surveyAnswers: []
+            answers: []
         );
 
         $surveyRepository = $this->mockRepository(objectId: (string)ObjectId::random(), timesCalled: 0);
@@ -73,7 +73,7 @@ class AddSurveyCommandHandlerUnitTest extends TestCase
     {
         $command = new AddSurveyCommand(
             question: 'Matheus',
-            surveyAnswers: [
+            answers: [
                 [],
                 [
                     'answer' => 'PHP',
@@ -96,7 +96,7 @@ class AddSurveyCommandHandlerUnitTest extends TestCase
     {
         $command = new AddSurveyCommand(
             question: 'Matheus',
-            surveyAnswers: [
+            answers: [
                 [
                     'answer' => 'PHP',
                     'image' => '/',
