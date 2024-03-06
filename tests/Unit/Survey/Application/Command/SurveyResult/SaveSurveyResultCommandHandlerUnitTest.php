@@ -6,9 +6,12 @@ namespace Tests\Unit\Survey\Application\Command\SurveyResult;
 
 use Survey\Application\Command\SurveyResult\SaveSurveyResultCommand;
 use Survey\Application\Command\SurveyResult\SaveSurveyResultCommandHandler;
+use Survey\Domain\Entity\Survey;
 use Survey\Domain\Entity\SurveyResult;
+use Survey\Domain\Repository\SurveyRepositoryInterface;
 use Survey\Domain\Repository\SurveyResultRepositoryInterface;
 use Survey\Domain\ValueObject\ObjectId;
+use Survey\Domain\ValueObject\SurveyAnswer;
 use Survey\Domain\ValueObject\SurveyResultAnswer;
 use Tests\TestCase;
 
@@ -54,12 +57,33 @@ class SaveSurveyResultCommandHandlerUnitTest extends TestCase
         return $mockRepository;
     }
 
+    private function mockSurveyRepository(string $objectId, int $timesCalled = 1)
+    {
+        $mockEntity = \Mockery::mock(Survey::class, [
+            'Question',
+            [new SurveyAnswer('answer')],
+            false,
+            new ObjectId(value: $objectId)
+        ]);
+
+        $mockRepository = \Mockery::mock(\stdClass::class, SurveyRepositoryInterface::class);
+        $mockRepository->shouldReceive('loadAnswersBySurveyId')
+            ->times($timesCalled)
+            ->andReturn(['answer']);
+
+        return $mockRepository;
+    }
+
     public function test_can_be_add_survey_result()
     {
         $surveyResultRepository = $this->mockRepository(objectId: (string)ObjectId::random());
+        $surveyRepository = $this->mockSurveyRepository(objectId: (string)ObjectId::random());
 
         $command = new SaveSurveyResultCommand(userId: 'user_id', surveyId: 'survey_id', answer: 'answer');
-        $commandHandler = new SaveSurveyResultCommandHandler(surveyAnswerRepository: $surveyResultRepository);
+        $commandHandler = new SaveSurveyResultCommandHandler(
+            surveyResultRepository: $surveyResultRepository,
+            surveyRepository: $surveyRepository
+        );
 
         $result = ($commandHandler)(command: $command);
 

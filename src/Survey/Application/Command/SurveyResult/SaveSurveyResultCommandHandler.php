@@ -20,9 +20,10 @@ class SaveSurveyResultCommandHandler
     public function __invoke(SaveSurveyResultCommand $command): array
     {
         $answers = $this->surveyRepository->loadAnswersBySurveyId(surveyId: $command->getSurveyId());
-        if ( !$answers ) {
+        if ( count($answers) === 0 ) {
             return self::error('Not found answers for this survey');
         }
+
 
         if (!in_array($command->answer, $answers)) {
             return self::error('Invalid answer for this survey');
