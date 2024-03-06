@@ -94,4 +94,25 @@ class SurveyRepository implements SurveyRepositoryInterface
         $result = $this->collection->aggregate($query->build());
         return $result->toArray();
     }
+
+    public function loadAnswersBySurveyId(string $surveyId): array
+    {
+        $query = new QueryBuilder();
+        $query->match([
+            '_id' => $surveyId
+        ]);
+        $query->project([
+            '_id' => 0,
+            'answers' => '$answers.answer'
+        ]);
+
+        $result = ($this->collection->aggregate($query->build()))->toArray();
+        return $result ? iterator_to_array($result[0]['answers']) : [];
+    }
+
+    public function checkById(string $surveyId): bool
+    {
+        $survey = $this->collection->findOne(['_id' => $surveyId], ['projection' => ['_id' => 1]]);
+        return $survey !== null;
+    }
 }

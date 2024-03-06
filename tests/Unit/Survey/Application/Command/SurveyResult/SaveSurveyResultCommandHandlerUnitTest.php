@@ -49,7 +49,7 @@ class SaveSurveyResultCommandHandlerUnitTest extends TestCase
             ->times($timesCalled)
             ->andReturn($this->mockEntity($objectId));
 
-        $mockRepository->shouldReceive('loadBySurveyId')->times(1);
+        $mockRepository->shouldReceive('loadBySurveyId')->times(1)->andReturn(['a']);
 
         return $mockRepository;
     }
@@ -63,9 +63,7 @@ class SaveSurveyResultCommandHandlerUnitTest extends TestCase
 
         $result = ($commandHandler)(command: $command);
 
-//        $this->assertTrue($result['success']);
-//        $this->assertEquals('Survey created successfully', $result['message']);
-//        $this->assertIsArray($result['result']);
+        $this->assertIsArray($result);
     }
 
     protected function tearDown(): void
